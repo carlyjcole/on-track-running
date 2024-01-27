@@ -6,7 +6,7 @@ import axios from 'axios';
 const FetchDataFromStrava = () => {
   console.log("fetching"); 
   const [activities, setActivities] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); 
+  const [selectedYear] = useState(new Date().getFullYear()); 
   const clientID = 120096;
   const clientSecret = 'bc3ec467a7464ae5be9fc7a7f6cc69f126945851';
   const refreshToken = 'f545ac531dd1373ffca07f31d543f2e197810468';
@@ -21,9 +21,13 @@ const FetchDataFromStrava = () => {
 
     const fetchData = async (page = 1) => {
       try {
-        const stravaAuthResponse = await axios.post(`${auth_link}?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`);
-        const accessToken = stravaAuthResponse.data.access_token;
-        const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${page}&per_page=${perPage}`);
+        const stravaAuthResponse = await axios.post('http://localhost:3001/strava/auth');
+        const accessToken = stravaAuthResponse.data.accessToken;
+        const stravaActivityResponse = await axios.get(`http://localhost:3001/strava/activities?access_token=${accessToken}`);
+
+        // const stravaAuthResponse = await axios.post(`${auth_link}?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`);
+        // const accessToken = stravaAuthResponse.data.access_token;
+        // const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${page}&per_page=${perPage}`);
         const newActivities = stravaActivityResponse.data;
 
         console.log("Strava API Response:", stravaActivityResponse.data);

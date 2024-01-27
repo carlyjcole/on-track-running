@@ -17,7 +17,7 @@ const ShoeTracker = () => {
 
   return (
     <div>
-      {shoes.length != 0 && <h2>current shoe:</h2>}
+      {shoes.length !== 0 && <h2>current shoe:</h2>}
       <ul>
         {shoes.map((shoe, index) => (
           <li key={index}>

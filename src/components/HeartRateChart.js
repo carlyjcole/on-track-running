@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { lightBlue } from '@mui/material/colors';
 
 const chartSetting = {
   xAxis: [

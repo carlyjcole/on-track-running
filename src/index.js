@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
-import { motion } from 'framer-motion'; 
 import './index.css';
 import './App.css'; 
 import App from './App';

@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import DropdownMenu from '../components/DropdownMenu';
 import HeartRateChart from '../components/HeartRateChart';
 import ShoeTracker from '../components/ShoeTracker'; 
 import AroundTheWorld from '../components/AroundTheWorld';
-import EarthImage from '../images/earth.png'
-import ReactCurvedText from 'react-curved-text';
 import Reveal from '../components/Reveal'; 
 
 const Stats = ({ activities }) => {
