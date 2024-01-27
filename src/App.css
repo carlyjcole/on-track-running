@@ -1,0 +1,63 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.App {
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'wotfard';
+  src: local('wotfard'), url(fonts/wotfard-regular-webfont.ttf) format('woff');
+}
+
+header {
+  color: rgb(172, 209, 239);
+  font-family: 'wotfard', sans-serif;
+}
+
+h1, h2 {
+  color: rgb(172, 209, 239);
+  font-family: 'wotfard', sans-serif;
+  font-size: 25px;
+}
+
+p {
+  color:rgb(94, 113, 129);
+  font-family: 'wotfard', sans-serif;
+}
+
+body {
+  margin: 40px; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  border: 5px solid rgb(217, 229, 238);
+  background-color: aliceblue;
+  }
+
+.title {
+  color: rgb(217, 229, 238);
+  }
+
+.stat-box {
+  width: 200px;
+  height: 150px;
+  border: 2px solid rgb(217, 229, 238);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.new-shoes {
+  padding: 20px; 
+}
+
+.rotating-curved-text {
+  animation: spin 7s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
