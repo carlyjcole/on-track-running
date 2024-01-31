@@ -21,7 +21,7 @@ const Login = () => {
       setErrors(validation(values)); 
 
       try {
-        const response = await axios.post('http://localhost:3000/users/signup', {
+        const response = await axios.post('http://localhost:4000/register', {
           username: values.username,
           password: values.password
         });

@@ -28,6 +28,7 @@ router.post('/register', async (req, res) => {
   try {
     const userId = await registerUser(username, password);
     res.status(201).json({ userId });
+    console.log('user created'); 
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -36,6 +37,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  console.log('in login'); 
 
   try {
     const user = await authenticateUser(username, password);
@@ -43,6 +45,7 @@ router.post('/login', async (req, res) => {
     if (user) {
       req.session.userId = user.id; 
       res.json({ user });
+      console.log('user logged in'); 
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -74,7 +77,7 @@ router.get('/strava/activities', async (req, res) => {
   try {
     const stravaAuthResponse = await axios.post(`${auth_link}?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`);
     const accessToken = stravaAuthResponse.data.access_token;
-    const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${page}&per_page=${perPage}`);
+    const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${1}&per_page=${perPage}`);
     const activities = stravaActivityResponse.data;
     // const accessToken = req.query.access_token;
     // const stravaActivityResponse = await axios.get(`${activitiesLink}?access_token=${accessToken}&per_page=${perPage}`);

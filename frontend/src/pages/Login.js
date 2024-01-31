@@ -21,7 +21,7 @@ const Login = () => {
         try {
           const response = await axios.post('http://localhost:3000/users/register', {
             username: values.username,
-            password: values.password
+            password: values.password, 
           });
     
           console.log('User registered successfully. UserId:', response.data.userId);

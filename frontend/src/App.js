@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'; 
-import FetchDataFromStrava from './components/FetchDataFromStrava';
+// import FetchDataFromStrava from './components/FetchDataFromStrava';
 
 const App = () => {
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ const App = () => {
     try {
       console.log("clicked"); 
       navigate('/fetch'); 
-      // navigate('/stats', { state: { selectedYear: '2023', stats: data } });
     } catch (error) {
       console.log(error); 
     }

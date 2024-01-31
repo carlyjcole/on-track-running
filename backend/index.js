@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser'); 
 const router = require('./routes/router'); 
 const mysql = require('mysql2/promise'); 
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -14,8 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-const authRoutes = require('./routes/authRoutes');
 
 const corsOptions = {
   origin: '*',
@@ -30,8 +29,8 @@ app.use('/', router);
 const db = mysql.createConnection({ 
   host: 'localhost', 
   user: 'root',
-  password: '',
-  database: 'users'
+  password: '0n3dir3cti0N!33',
+  database: 'ontrack'
 });
 
 const port = 4000; 
