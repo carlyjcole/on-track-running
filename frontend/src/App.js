@@ -10,7 +10,7 @@ const App = () => {
   const handleClick = async () => {
     try {
       console.log("clicked"); 
-      navigate('/fetch'); 
+      navigate('/login'); 
     } catch (error) {
       console.log(error); 
     }
@@ -31,6 +31,7 @@ const App = () => {
       >
         see my stats
       </motion.button>
+
     </div>
   );
 };

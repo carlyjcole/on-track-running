@@ -116,7 +116,7 @@ const Stats = ({ activities }) => {
       <Reveal> 
         <h2 class='new-shoes'>is it time for some new shoes?</h2>
       </Reveal>
-      <ShoeTracker />
+      {/* <ShoeTracker /> */}
 
       <AroundTheWorld />
 
@@ -124,8 +124,7 @@ const Stats = ({ activities }) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={handleClick}
-        className="bg-lightblue text-white font-wotfard text-l py-2 px-4 rounded mt-4"
-      >
+        className="bg-lightblue text-white font-wotfard text-l py-2 px-4 rounded mt-4">
         back to home
       </motion.button>
 

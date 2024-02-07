@@ -6,7 +6,7 @@ passport.use('strava', new OAuth2Strategy({
     tokenURL: 'https://www.strava.com/oauth/token',
     clientID: 'your-client-id',
     clientSecret: 'your-client-secret',
-    callbackURL: 'http://localhost:3000/auth/strava/callback' // Adjust the callback URL accordingly
+    callbackURL: 'http://localhost:3000/auth/strava/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     return done(null, profile);

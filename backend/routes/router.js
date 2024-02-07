@@ -6,7 +6,6 @@ const cors = require('cors');
 const { registerUser, authenticateUser } = require('../db.js'); 
 
 const app = express();
-const port = 4000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -75,18 +74,18 @@ router.post('/strava/auth', async (req, res) => {
 
 router.get('/strava/activities', async (req, res) => {
   try {
-    const stravaAuthResponse = await axios.post(`${auth_link}?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`);
+    const stravaAuthResponse = await axios.post(`${auth_link}?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token&scope=activity:read_all`);
     const accessToken = stravaAuthResponse.data.access_token;
-    const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${1}&per_page=${perPage}`);
+    const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=1&per_page=${perPage}`);
     const activities = stravaActivityResponse.data;
-    // const accessToken = req.query.access_token;
-    // const stravaActivityResponse = await axios.get(`${activitiesLink}?access_token=${accessToken}&per_page=${perPage}`);
-    // const activities = stravaActivityResponse.data;
-    console.log("strava api response: " + stravaActivityResponse.data); 
+
+    // console.log("Strava API Response:", stravaActivityResponse.data);
+
+
     res.json({ activities });
   } catch (error) {
-    console.error('Error fetching Strava activities:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
