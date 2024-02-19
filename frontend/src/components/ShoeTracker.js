@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ShoeInputForm from './ShoeInputForm';
+import axios from 'axios'; 
 
-const ShoeTracker = () => {
+const ShoeTracker = ({ userId }) => {
   useEffect(() => {
     const savedShoes = JSON.parse(localStorage.getItem('shoes')) || [];
     setShoes(savedShoes);
@@ -9,10 +10,19 @@ const ShoeTracker = () => {
 
   const [shoes, setShoes] = useState([]);
 
-  const handleAddShoe = (newShoe) => {
-    setShoes([...shoes, newShoe]);
-    
-    localStorage.setItem('shoes', JSON.stringify([...shoes, newShoe]));
+  const handleAddShoe = async (newShoe) => {
+    try {
+      const response = await axios.post('http://localhost:4000/shoes', newShoe);
+  
+      if (!response.ok) {
+        throw new Error('Failed to add shoe');
+      }
+  
+      const result = await response.text();
+      console.log(result); // Output success message
+    } catch (error) {
+      console.error('Error adding shoe:', error.message);
+    }
   };
 
   return (

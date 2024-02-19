@@ -47,6 +47,15 @@ body {
   justify-content: center;
 }
 
+.world-box {
+  width: 400px;
+  height: 200px;
+  border: 2px solid rgb(217, 229, 238);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
 .new-shoes {
   padding: 20px; 
 }

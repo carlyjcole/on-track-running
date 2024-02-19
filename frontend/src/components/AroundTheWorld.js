@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import EarthImage from '../images/earth.png';
 import ReactCurvedText from 'react-curved-text'; 
 
@@ -23,7 +22,7 @@ const AroundTheWorld = () => {
 
   return (
      <div className='flex flex-wrap justify-center'>
-        <div className="centered-content" style={{ position: 'relative'}}>
+        <div className="centered-content" style={{ position: 'relative' }}>
           <ReactCurvedText
             width={width}
             height={height}
@@ -42,6 +41,7 @@ const AroundTheWorld = () => {
           />
           <img src={EarthImage} alt="Earth" className="earth-image" style={{ position: 'absolute', top: 75, 
               left: 75, width: '200px', opacity: '60%' }}/>
+
       </div>
     </div>
   );

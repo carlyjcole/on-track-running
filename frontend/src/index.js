@@ -9,17 +9,19 @@ import FetchDataFromStrava from './components/FetchDataFromStrava';
 import Error from './pages/Error';
 import Login from './pages/Login'; 
 import Signup from './pages/Signup'; 
+import Home from './pages/Home'; 
 
 ReactDOM.render(
   <Router>
     <Routes>
-      <Route path="/auth" element={<Auth />} />
       <Route path="/" element={<App />} />
       <Route path="/stats" element={<Stats />} />
       <Route path="/fetch" element={<FetchDataFromStrava />} />
       <Route path="/error" element={<Error />} /> 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/home" element={<Home />} />
+      {/* <Route path="/auth" element={<Auth />} /> */}
     </Routes>
   </Router>,
   document.getElementById('root')

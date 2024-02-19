@@ -1,22 +1,21 @@
 const bcrypt = require('bcrypt');
-const pool = require('./db.js');
+const pool = require('../db.js');
+const mongoose = require('mongoose');
 
-const authenticateUser = async (username, password) => {
-  const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
-  const user = rows[0];
-
-  if (user && await bcrypt.compare(password, user.password_hash)) {
-    return user;
-  } else {
-    return null;
+const userSchema = new mongoose.Schema({
+  id: { type: Number },
+  username: { type: String, unique: true },
+  shoes: [{
+    brand: String,
+    model: String,
+    acquisition_date: Date
+  }],
+  stravaAuth: {
+    access_token: String,
+    refresh_token: String
   }
-};
+});
 
-const registerUser = async (username, password) => {
-    const hashedPassword = await bcrypt.hash(password, 10);
+const User = mongoose.model('User', userSchema);
 
-    const [rows] = await pool.execute('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username, hashedPassword]);
-    return rows.insertId;
-    };
-
-module.exports = { registerUser, authenticateUser };
+module.exports = User;

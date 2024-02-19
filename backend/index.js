@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const SQLiteStore = require('connect-sqlite3')(session);
 const router = require('./routes/router'); 
 const authRouter = require('./routes/auth');
-
+const mongoose = require('mongoose'); 
+// const StravaStrategy = require('passport-strava-oauth2').Strategy;
+const User = require('./models/user'); 
 const app = express();
 
 app.use(cors()); 

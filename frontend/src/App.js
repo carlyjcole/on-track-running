@@ -9,8 +9,7 @@ const App = () => {
 
   const handleClick = async () => {
     try {
-      console.log("clicked"); 
-      navigate('/login'); 
+      navigate('/home'); 
     } catch (error) {
       console.log(error); 
     }

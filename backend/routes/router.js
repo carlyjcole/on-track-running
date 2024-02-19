@@ -1,14 +1,23 @@
 const express = require('express'); 
 const router = express.Router();
+var passport = require('passport');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { registerUser, authenticateUser } = require('../db.js'); 
-
+var db = require('../db');
+const authRoutes = require('./auth');
+const isAuthenticated = require('../middleware/isAuthenticated');
+const User = require('../models/user');
 const app = express();
+const mongoose = require('mongoose');
+
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRoutes); 
+app.use('/shoes', isAuthenticated);
 
 const clientID = 120096;
 const clientSecret = 'bc3ec467a7464ae5be9fc7a7f6cc69f126945851'; //change this so its not hardcoded
@@ -17,49 +26,29 @@ const auth_link = "https://www.strava.com/oauth/token";
 const activities_link = "https://www.strava.com/api/v3/athlete/activities";
 const perPage = 200;
 
-router.get('/profile', (req, res) => {
 
-}); 
-
-router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-
+router.post('/shoes/:userId', async (req, res) => {
   try {
-    const userId = await registerUser(username, password);
-    res.status(201).json({ userId });
-    console.log('user created'); 
+    const userIdInteger = parseInt(req.params.userId, 10);
+    const userId = new mongoose.Types.ObjectId(userIdInteger); 
+    const newShoe = {
+      brand: req.body.brand,
+      model: req.body.model,
+      acquisition_date: new Date(req.body.acquisition_date)
+    };
+
+    const user = await User.findById(userId); 
+
+    user.shoes.push(newShoe);
+
+    await user.save();
+
+    res.status(201).json({ message: 'Shoe added successfully', shoe: newShoe });
   } catch (error) {
-    console.error('Error registering user:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error adding shoe:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
-
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  console.log('in login'); 
-
-  try {
-    const user = await authenticateUser(username, password);
-
-    if (user) {
-      req.session.userId = user.id; 
-      res.json({ user });
-      console.log('user logged in'); 
-    } else {
-      res.status(401).json({ error: 'Invalid credentials' });
-    }
-  } catch (error) {
-    console.error('Error authenticating user:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-
-router.post('/shoes', (req, res) => {
-    const {shoeName, acquisitionDate} = req.body;
-    console.log(shoeName + ' | ' + acquisitionDate);
-    res.send('received shoe information'); 
-}); 
 
 router.post('/strava/auth', async (req, res) => {
   try {

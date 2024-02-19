@@ -1,10 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stats from '../pages/Stats'
 import axios from 'axios';
-import { Dialog, Transition } from '@headlessui/react'; 
 
-const FetchDataFromStrava = () => {
-  console.log("fetching"); 
+const FetchDataFromStrava = ({ userId }) => {
   const [activities, setActivities] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); 
   const clientID = 120096;
@@ -25,16 +23,6 @@ const FetchDataFromStrava = () => {
         const accessToken = stravaAuthResponse.data.access_token;
         const stravaActivityResponse = await axios.get(`${activities_link}?access_token=${accessToken}&page=${page}&per_page=${perPage}`);
         const newActivities = stravaActivityResponse.data;
-
-        console.log("Strava API Response:", stravaActivityResponse.data);
-
-        newActivities.forEach(activity => {
-          console.log("Average Heartrate:", activity.average_heartrate);
-          console.log("Average Speed:", activity.average_speed);
-          console.log("Distance:", activity.distance);
-          console.log("Start Date:", activity.start_date);
-          console.log("-------------------------");
-        });
 
         setActivities(prevActivities => [...prevActivities, ...newActivities]);
 
@@ -59,7 +47,7 @@ const FetchDataFromStrava = () => {
 
   return (
       <div>
-        <Stats year={selectedYear} activities={activities} />
+        <Stats userId={ userId } activities={ activities } />
       </div>
     );
 };

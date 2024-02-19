@@ -22,7 +22,7 @@ const Reveal = ({ children, width='w-full' }) => {
                 }}
                 initial='hidden'
                 animate='visible'
-                transition={{ duration: 0.5, delay: 0.25 }}
+                transition={{ duration: 0.75, delay: 0.75 }}
                 >
                 {children}
             </motion.div>
