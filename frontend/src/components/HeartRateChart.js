@@ -14,7 +14,10 @@ const chartSetting = {
 const valueFormatter = (value) => `${value} bpm`;
 
 const HeartRateChart = ({ activities }) => {
-  console.log(activities);
+
+  if (!Array.isArray(activities)) {
+    return <div>No activities data available</div>;
+  }
 
   const paceCategories = [
     { label: '7:00-7:30', minPace: 3.6, maxPace: 3.9 },
