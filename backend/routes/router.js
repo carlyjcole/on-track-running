@@ -20,7 +20,7 @@ app.use('/auth', authRoutes);
 app.use('/shoes', isAuthenticated);
 
 const clientID = 120096;
-const clientSecret = 'bc3ec467a7464ae5be9fc7a7f6cc69f126945851'; //change this so its not hardcoded
+const clientSecret = 'bc3ec467a7464ae5be9fc7a7f6cc69f126945851'; 
 const refreshToken = '17cdd8dfd293ca753feb814ef4b5adfa02f323f9';
 const auth_link = "https://www.strava.com/oauth/token";
 const activities_link = "https://www.strava.com/api/v3/athlete/activities";

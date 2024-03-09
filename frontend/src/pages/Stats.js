@@ -15,6 +15,7 @@ const Stats = ({ userId, activities }) => {
   const [averageHeartRate, setAverageHeartRate] = useState(0);
   const [totalDistance, setTotalDistance] = useState(0);
   const [worldDistance, setWorldDistance] = useState(0); 
+  const [filteredActivities, setFilteredActivities] = useState(0); 
 
   const navigate = useNavigate();
 
@@ -56,10 +57,11 @@ const Stats = ({ userId, activities }) => {
       setAverageHeartRate(averageHeartRate);
       setTotalDistance(totalDistance);
       setWorldDistance(worldDistance); 
+      setFilteredActivities(filteredActivities); 
     };
 
     calculateTotals();
-}, [activities, selectedYear, isAllTime]);
+}, [activities, filteredActivities, selectedYear, isAllTime]);
 
 
 return (
@@ -112,9 +114,9 @@ return (
 
     </div>
     
+    <Reveal><h2>how's heart rate training going?</h2></Reveal>
     <div className='flex flex-wrap justify-center'>
-      <Reveal><p>how's heart rate training going?</p></Reveal>
-      <HeartRateChart activities={ activities }/>
+      <HeartRateChart activities={ filteredActivities }/>
     </div>
 
     <Reveal> 

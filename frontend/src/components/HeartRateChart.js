@@ -17,21 +17,31 @@ const HeartRateChart = ({ activities }) => {
   console.log(activities);
 
   const paceCategories = [
-    { label: '7:00-7:30', minPace: 420, maxPace: 450 },
-    { label: '7:30-8:00', minPace: 450, maxPace: 480 },
-    { label: '8:00-8:30', minPace: 480, maxPace: 510 },
-    { label: '8:30-9:00', minPace: 510, maxPace: 540 },
-    { label: '9:00-9:30', minPace: 540, maxPace: 570 },
-    { label: '9:30-10:00', minPace: 570, maxPace: 600 },
+    { label: '7:00-7:30', minPace: 3.6, maxPace: 3.9 },
+    { label: '7:30-8:00', minPace: 3.3, maxPace: 3.5 },
+    { label: '8:00-8:30', minPace: 3.15, maxPace: 3.2 },
+    { label: '8:30-9:00', minPace: 3.0, maxPace: 3.1 },
+    { label: '9:00-9:30', minPace: 2.85, maxPace: 2.9 },
+    { label: '9:30-10:00', minPace: 2.6, maxPace: 2.8},
   ];
 
   const dataset = paceCategories.map(category => {
     const filteredActivities = activities.filter(activity => {
-      const pace = activity.moving_time / (activity.distance / 1000);
+      const pace = activity.average_speed;
+      console.log('pace:', pace);
       return pace >= category.minPace && pace < category.maxPace;
     });
-    
-    const averageHeartRate = filteredActivities.reduce((total, activity) => total + activity.heartrate, 0) / filteredActivities.length;
+
+    console.log('Filtered Activities:', filteredActivities);
+    console.log('filtered length:', filteredActivities.length); 
+
+    const activitiesWithHeartRate = filteredActivities.filter((activity) => activity.has_heartrate);
+
+    const totalHeartRate = activitiesWithHeartRate.reduce((total, activity) => total + activity.average_heartrate, 0);
+    const averageHeartRate = activitiesWithHeartRate.length > 0 ? Math.round(totalHeartRate / activitiesWithHeartRate.length) : 0;
+
+
+    console.log('Average Heart Rate:', averageHeartRate);
 
     return {
       paceCategory: category.label,

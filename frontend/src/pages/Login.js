@@ -27,9 +27,8 @@ const Login = ({ onLogin }) => {
       const response = await axios.post('http://localhost:4000/auth/login', values);
       console.log(response.data.message);
       const userId = response.data.userId;
-      console.log('login: userId', userId); 
-      onLogin(userId); 
-      // navigate('/fetch', { state: { userId: userId } });
+      // onLogin(userId); 
+      navigate('/fetch', { state: { userId: userId } });
     } catch (error) {
       console.error('Login failed:', error);
       setErrors('invalid username or password');

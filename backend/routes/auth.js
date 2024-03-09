@@ -85,12 +85,11 @@ router.post('/signup', async function(req, res, next) {
           username: req.body.username
       };
 
-      // Creating and saving user using Mongoose
-      const newUser = new User({
-          id: user.id, 
-          username: user.username,
-      });
-      await newUser.save(); 
+      // const newUser = new User({
+      //     id: user.id, 
+      //     username: user.username,
+      // });
+      // await newUser.save(); 
 
       console.log('User registered successfully:', user);
 

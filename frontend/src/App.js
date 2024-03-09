@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'; 
-// import FetchDataFromStrava from './components/FetchDataFromStrava';
 
 const App = () => {
   const navigate = useNavigate();
